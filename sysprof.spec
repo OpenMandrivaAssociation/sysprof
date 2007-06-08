@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.8
-%define	release	%mkrel 2
+%define	release	%mkrel 3
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -127,5 +127,3 @@ dkms remove -m %{name} -v %{version} --rpm_safe_upgrade --all ||:
 %{_miconsdir}/*
 %{_menudir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
-
-
