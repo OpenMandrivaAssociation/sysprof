@@ -1,6 +1,6 @@
 %define	name	sysprof
-%define	version	1.0.8
-%define	release	%mkrel 3
+%define	version	1.0.9
+%define	release	%mkrel 1
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -8,7 +8,7 @@ Version:	%{version}
 Release:	%{release}
 License:	GPL
 Group:		Development/Other
-Source:		%{name}-%{version}.tar.bz2
+Source:		%{name}-%{version}.tar.gz
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):	dkms
@@ -35,7 +35,7 @@ sed -i 's/include.*\.\.\/config\.h.*$/define PACKAGE_VERSION \"%{version}\"/' mo
 
 %build
 aclocal
-autoconf-2.5x
+autoconf
 automake
 %configure2_5x --disable-kernel-module
 %make
