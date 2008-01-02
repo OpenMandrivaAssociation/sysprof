@@ -10,6 +10,7 @@ License:	GPL
 Group:		Development/Other
 Source:		%{name}-%{version}.tar.gz
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):	dkms
 Requires(preun):	dkms
 BuildRequires:	autoconf2.5
