@@ -47,18 +47,7 @@ rm -rf $RPM_BUILD_ROOT
 # Menu
 ######
 
-mkdir -p %{buildroot}{%{_miconsdir},%{_iconsdir},%{_liconsdir},%{_menudir}}
 
-install -m 755 -d %buildroot%{_menudir}
-cat << EOF > %buildroot%{_menudir}/%{name}
-?package(%name): needs="x11" \
-	section="More Applications/Development/Tools" \
-	title="Sysprof" \
-	icon="%{name}.png"\
-	longtitle="System-wide Linux Profiler" \
-	command="%{_bindir}/%{name}" \
-	xdg="true"
-EOF
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -125,5 +114,4 @@ dkms remove -m %{name} -v %{version} --rpm_safe_upgrade --all ||:
 %{_liconsdir}/*
 %{_iconsdir}/*.png
 %{_miconsdir}/*
-%{_menudir}/*
 %{_datadir}/applications/mandriva-%{name}.desktop
