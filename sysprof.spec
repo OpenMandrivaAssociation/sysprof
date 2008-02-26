@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.9
-%define	release	%mkrel 2
+%define	release	%mkrel 3
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -62,6 +62,7 @@ StartupNotify=true
 Categories=GTK;Development;Profiling;X-MandrivaLinux-MoreApplications-Development-Tools;
 EOF
 
+mkdir -p $RPM_BUILD_ROOT{%{_liconsdir},%{_iconsdir},%{_miconsdir}}
 cp sysprof-icon.png $RPM_BUILD_ROOT%{_liconsdir}/sysprof.png
 convert sysprof-icon.png -geometry 32x32 $RPM_BUILD_ROOT%{_iconsdir}/sysprof.png
 convert sysprof-icon.png -geometry 16x16 $RPM_BUILD_ROOT%{_miconsdir}/sysprof.png
