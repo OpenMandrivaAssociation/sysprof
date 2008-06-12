@@ -94,7 +94,9 @@ EOF
 rm -rf $RPM_BUILD_ROOT
 
 %post
+%if %mdkversion < 200900
 %update_menus
+%endif
 dkms add -m %{name} -v %{version} --rpm_safe_upgrade
 dkms build -m %{name} -v %{version} --rpm_safe_upgrade
 dkms install -m %{name} -v %{version} --rpm_safe_upgrade
@@ -102,8 +104,10 @@ dkms install -m %{name} -v %{version} --rpm_safe_upgrade
 %preun
 dkms remove -m %{name} -v %{version} --rpm_safe_upgrade --all ||:
 
+%if %mdkversion < 200900
 %postun
 %update_menus
+%endif
 
 %files
 %defattr(-,root,root)
