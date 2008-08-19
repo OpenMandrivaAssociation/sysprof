@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.10
-%define	release	%mkrel 3
+%define	release	%mkrel 4
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -42,7 +42,7 @@ automake
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%makeinstall
+%makeinstall_std
 
 # Menu
 ######
