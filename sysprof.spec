@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.10
-%define	release	%mkrel 4
+%define	release	%mkrel 5
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -9,6 +9,7 @@ Release:	%{release}
 License:	GPL
 Group:		Development/Other
 Source:		%{name}-%{version}.tar.gz
+Patch0:		sysprof-module-new-kernel.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):	dkms
@@ -30,8 +31,10 @@ recompiled. In fact they don't even have to be restarted.
 Just insert the kernel module and start sysprof.
 
 %prep
-%setup -q 
-sed -i 's/include.*\.\.\/config\.h.*$/define PACKAGE_VERSION \"%{version}\"/' module/sysprof-module.c
+%setup -q
+cd module
+%patch0 -p0
+sed -i 's/include.*\.\.\/config\.h.*$/define PACKAGE_VERSION \"%{version}\"/' sysprof-module.c
 
 %build
 aclocal
