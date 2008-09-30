@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.10
-%define	release	%mkrel 5
+%define	release	%mkrel 6
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -34,7 +34,6 @@ Just insert the kernel module and start sysprof.
 %setup -q
 cd module
 %patch0 -p0
-sed -i 's/include.*\.\.\/config\.h.*$/define PACKAGE_VERSION \"%{version}\"/' sysprof-module.c
 
 %build
 aclocal
@@ -75,6 +74,7 @@ convert sysprof-icon.png -geometry 16x16 $RPM_BUILD_ROOT%{_miconsdir}/sysprof.pn
 
 install -d -m 755 %{buildroot}%{_prefix}/src
 cp -a module %{buildroot}%{_prefix}/src/%{name}-%{version}
+cp config.h %{buildroot}%{_prefix}/src/%{name}-%{version}
 
 cat > %{buildroot}%{_prefix}/src/%{name}-%{version}/dkms.conf <<EOF
 
