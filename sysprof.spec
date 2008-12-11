@@ -17,7 +17,7 @@ Requires(preun):	dkms
 BuildRequires:	autoconf2.5
 BuildRequires:	libglade2.0-devel
 BuildRequires:	binutils-devel
-BuildRequires:	ImageMagick
+BuildRequires:	imagemagick
 ExclusiveArch:	%{ix86} x86_64
 
 %description
