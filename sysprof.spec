@@ -10,6 +10,7 @@ License:	GPL
 Group:		Development/Other
 Source:		%{name}-%{version}.tar.gz
 Patch0:		sysprof-module-new-kernel.patch
+Patch1:		sysprof-1.0.10-fix-str-fmt.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):	dkms
@@ -34,6 +35,8 @@ Just insert the kernel module and start sysprof.
 %setup -q
 cd module
 %patch0 -p0
+cd -
+%patch1 -p0
 
 %build
 aclocal
