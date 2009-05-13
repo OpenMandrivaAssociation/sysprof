@@ -1,6 +1,6 @@
 %define	name	sysprof
-%define	version	1.0.10
-%define	release	%mkrel 7
+%define	version	1.0.12
+%define	release	%mkrel 1
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -9,7 +9,6 @@ Release:	%{release}
 License:	GPL
 Group:		Development/Other
 Source:		%{name}-%{version}.tar.gz
-Patch0:		sysprof-module-new-kernel.patch
 Patch1:		sysprof-1.0.10-fix-str-fmt.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -33,15 +32,9 @@ Just insert the kernel module and start sysprof.
 
 %prep
 %setup -q
-cd module
-%patch0 -p0
-cd -
 %patch1 -p0
 
 %build
-aclocal
-autoconf
-automake
 %configure2_5x --disable-kernel-module
 %make
 
@@ -95,6 +88,7 @@ AUTOINSTALL=yes
 REMAKE_INITRD=no
 
 EOF
+sed -i 's|../config\.h|config.h|' %{buildroot}%{_prefix}/src/%{name}-%{version}/sysprof-module.c
 
 %clean
 rm -rf $RPM_BUILD_ROOT
