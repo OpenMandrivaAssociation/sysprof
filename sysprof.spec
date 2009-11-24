@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.0.12
-%define	release	%mkrel 1
+%define	release	%mkrel 2
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -8,8 +8,9 @@ Version:	%{version}
 Release:	%{release}
 License:	GPL
 Group:		Development/Other
-Source:		%{name}-%{version}.tar.gz
+Source0:	%{name}-%{version}.tar.gz
 Patch1:		sysprof-1.0.10-fix-str-fmt.patch
+Patch2:		sysprof-1.0.12-libbfd-static.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Requires(post):	dkms
@@ -33,8 +34,10 @@ Just insert the kernel module and start sysprof.
 %prep
 %setup -q
 %patch1 -p0
+%patch2 -p1 -b .bfd_static~
 
 %build
+autoreconf -f
 %configure2_5x --disable-kernel-module
 %make
 
