@@ -1,6 +1,6 @@
 %define	name	sysprof
-%define	version	1.0.12
-%define	release	%mkrel 2
+%define	version	1.1.4
+%define	release	%mkrel 1
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
@@ -9,12 +9,9 @@ Release:	%{release}
 License:	GPL
 Group:		Development/Other
 Source0:	%{name}-%{version}.tar.gz
-Patch1:		sysprof-1.0.10-fix-str-fmt.patch
-Patch2:		sysprof-1.0.12-libbfd-static.patch
+Patch1:		sysprof-fix-str-fmt.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-Requires(post):	dkms
-Requires(preun):	dkms
 BuildRequires:	autoconf2.5
 BuildRequires:	libglade2.0-devel
 BuildRequires:	binutils-devel
@@ -33,22 +30,15 @@ Just insert the kernel module and start sysprof.
 
 %prep
 %setup -q
-%patch1 -p0
-%patch2 -p1 -b .bfd_static~
+%patch1 -p1
 
 %build
-autoreconf -f
-%configure2_5x --disable-kernel-module
+%configure2_5x
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
-
-# Menu
-######
-
-
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
 cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
@@ -64,61 +54,20 @@ Categories=GTK;Development;Profiling;X-MandrivaLinux-MoreApplications-Developmen
 EOF
 
 mkdir -p $RPM_BUILD_ROOT{%{_liconsdir},%{_iconsdir},%{_miconsdir}}
-cp sysprof-icon.png $RPM_BUILD_ROOT%{_liconsdir}/sysprof.png
-convert sysprof-icon.png -geometry 32x32 $RPM_BUILD_ROOT%{_iconsdir}/sysprof.png
-convert sysprof-icon.png -geometry 16x16 $RPM_BUILD_ROOT%{_miconsdir}/sysprof.png
-
-# DKMS 
-######
-
-install -d -m 755 %{buildroot}%{_prefix}/src
-cp -a module %{buildroot}%{_prefix}/src/%{name}-%{version}
-cp config.h %{buildroot}%{_prefix}/src/%{name}-%{version}
-
-cat > %{buildroot}%{_prefix}/src/%{name}-%{version}/dkms.conf <<EOF
-
-PACKAGE_VERSION="%{version}"
-
-# Items below here should not have to change with each driver version
-PACKAGE_NAME="%{name}"
-MAKE[0]="make -C \${kernel_source_dir} SUBDIRS=\${dkms_tree}/\${PACKAGE_NAME}/\${PACKAGE_VERSION}/build modules"
-CLEAN="make clean"
-
-BUILT_MODULE_NAME[0]="\$PACKAGE_NAME-module"
-DEST_MODULE_LOCATION[0]="/kernel/3rdparty/\$PACKAGE_NAME/"
-
-AUTOINSTALL=yes
-REMAKE_INITRD=no
-
-EOF
-sed -i 's|../config\.h|config.h|' %{buildroot}%{_prefix}/src/%{name}-%{version}/sysprof-module.c
+cp sysprof-icon-48.png $RPM_BUILD_ROOT%{_liconsdir}/sysprof.png
+cp sysprof-icon-16.png $RPM_BUILD_ROOT%{_miconsdir}/sysprof.png
+cp sysprof-icon-32.png $RPM_BUILD_ROOT%{_iconsdir}/sysprof.png
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
-%post
-%if %mdkversion < 200900
-%update_menus
-%endif
-dkms add -m %{name} -v %{version} --rpm_safe_upgrade
-dkms build -m %{name} -v %{version} --rpm_safe_upgrade
-dkms install -m %{name} -v %{version} --rpm_safe_upgrade
-
-%preun
-dkms remove -m %{name} -v %{version} --rpm_safe_upgrade --all ||:
-
-%if %mdkversion < 200900
-%postun
-%update_menus
-%endif
 
 %files
 %defattr(-,root,root)
 %doc AUTHORS COPYING ChangeLog INSTALL README TODO
 %{_bindir}/*
-%{_prefix}/src/%{name}-%{version}
 %{_datadir}/%{name}
 %{_datadir}/pixmaps/*
+/etc/udev/rules.d/60-sysprof.rules
 %{_liconsdir}/*
 %{_iconsdir}/*.png
 %{_miconsdir}/*
