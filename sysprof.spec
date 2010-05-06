@@ -1,5 +1,5 @@
 %define	name	sysprof
-%define	version	1.1.4
+%define	version	1.1.6
 %define	release	%mkrel 1
 
 Summary:	System-wide Linux Profiler
@@ -9,7 +9,6 @@ Release:	%{release}
 License:	GPL
 Group:		Development/Other
 Source0:	%{name}-%{version}.tar.gz
-Patch1:		sysprof-fix-str-fmt.patch
 URL:		http://www.daimi.au.dk/~sandmann/sysprof/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	autoconf2.5
@@ -30,7 +29,6 @@ Just insert the kernel module and start sysprof.
 
 %prep
 %setup -q
-%patch1 -p1
 
 %build
 %configure2_5x
