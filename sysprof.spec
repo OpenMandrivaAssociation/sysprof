@@ -1,6 +1,6 @@
 %define	name	sysprof
 %define	version	1.1.6
-%define	release	%mkrel 2
+%define release	3
 
 Summary:	System-wide Linux Profiler
 Name:		%{name}
