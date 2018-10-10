@@ -1,184 +1,128 @@
-%define	name	sysprof
-%define	version	1.1.6
-%define release	3
+%global major		2
+%define libname		%mklibname sysprof %major
+%define libnameui	%mklibname sysprof-ui %major
+%define devname		%mklibname sysprof -d
 
-Summary:	System-wide Linux Profiler
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-License:	GPL
-Group:		Development/Other
-Source0:	%{name}-%{version}.tar.gz
-URL:		http://www.daimi.au.dk/~sandmann/sysprof/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires:	autoconf2.5
-BuildRequires:	libglade2.0-devel
+%define url_ver	%(echo %{version}|cut -d. -f1,2)
+
+Name:		sysprof
+Version:	3.30.1
+Release:	1
+Summary:	A system-wide Linux profiler
+Group:		Development/Tools
+
+License:	GPLv3+
+URL:		http://www.sysprof.com
+Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 BuildRequires:	binutils-devel
-BuildRequires:	imagemagick
-ExclusiveArch:	%{ix86} x86_64
+BuildRequires:	gettext
+BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:	itstool
+BuildRequires:	polkit-1-devel
+BuildRequires:	pkgconfig(systemd)
+BuildRequires:	appstream-util
+BuildRequires:	desktop-file-utils
+BuildRequires:	libxml2-utils
+BuildRequires:	meson
+
+Requires:	hicolor-icon-theme
+Requires:	%{name}-cli%{?_isa} = %{version}-%{release}
 
 %description
-Sysprof is a sampling profiler that uses a kernel module to generate
-stacktraces which are then interpreted by the userspace program
-"sysprof".
+Sysprof is a sampling CPU profiler for Linux that collects accurate,
+high-precision data and provides efficient access to the sampled
+calltrees.
 
-Sysprof handles shared libraries and applications do not need to be
-recompiled. In fact they don't even have to be restarted.
 
-Just insert the kernel module and start sysprof.
+%package        cli
+Summary:	Sysprof command line utility
+Group:		Development/Tools
+
+%description    cli
+The %{name}-cli package contains the sysprof-cli command line utility.
+
+
+%package     -n %libname
+Summary:	Sysprof library
+Group:		System/Libraries
+
+%description -n %libname
+The libsysprof package contains the Sysprof library.
+
+
+%package     -n %libnameui
+Summary:	Sysprof UI library
+Group:		System/Libraries
+
+%description -n %libnameui
+The libsysprof-ui package contains the Sysprof UI library.
+
+
+%package        -n %devname
+Summary:	Development files for %{name}
+Group:		Development/Tools
+Requires:	%{name} = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libnameui} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	%{name}-ui-devel = %{version}-%{release}
+
+%description    -n %devname
+The %{devname} package contains libraries and header files for
+developing applications that use %{name}.
+
 
 %prep
-%setup -q
+%autosetup -p1
+
 
 %build
-%configure2_5x
-%make
+%meson
+%meson_build
+
 
 %install
-rm -rf $RPM_BUILD_ROOT
-%makeinstall_std
+%meson_install
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/applications
-cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
-[Desktop Entry]
-Name=Sysprof
-Comment=System-wide Linux Profiler
-Exec=%{_bindir}/%{name}
-Icon=%{name}
-Terminal=false
-Type=Application
-StartupNotify=true
-Categories=GTK;Development;Profiling;X-MandrivaLinux-MoreApplications-Development-Tools;
-EOF
+%find_lang %{name} --with-gnome
 
-mkdir -p $RPM_BUILD_ROOT{%{_liconsdir},%{_iconsdir},%{_miconsdir}}
-cp sysprof-icon-48.png $RPM_BUILD_ROOT%{_liconsdir}/sysprof.png
-cp sysprof-icon-16.png $RPM_BUILD_ROOT%{_miconsdir}/sysprof.png
-cp sysprof-icon-32.png $RPM_BUILD_ROOT%{_iconsdir}/sysprof.png
 
-%clean
-rm -rf $RPM_BUILD_ROOT
+%check
+appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
+desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+%meson_test || :
+
 
 %files
-%defattr(-,root,root)
-%doc AUTHORS COPYING ChangeLog INSTALL README TODO
-%{_bindir}/*
-%{_datadir}/%{name}
-%{_datadir}/pixmaps/*
-/etc/udev/rules.d/60-sysprof.rules
-%{_liconsdir}/*
-%{_iconsdir}/*.png
-%{_miconsdir}/*
-%{_datadir}/applications/mandriva-%{name}.desktop
+%license COPYING
+%doc NEWS README.md TODO AUTHORS
+%{_bindir}/sysprof
+%{_datadir}/metainfo/org.gnome.Sysprof2.appdata.xml
+%{_datadir}/applications/org.gnome.Sysprof2.desktop
+%{_datadir}/glib-2.0/schemas/org.gnome.sysprof2.gschema.xml
+%{_datadir}/icons/hicolor/*/*/*
+%{_datadir}/mime/packages/sysprof-mime.xml
 
+%files cli -f %{name}.lang
+%license COPYING
+%{_bindir}/sysprof-cli
+%{_libexecdir}/sysprof/sysprofd
+%{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
+%{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
+%{_datadir}/polkit-1/actions/org.gnome.sysprof2.policy
+%{_unitdir}/sysprof2.service
 
-%changelog
-* Wed Dec 08 2010 Oden Eriksson <oeriksson@mandriva.com> 1.1.6-2mdv2011.0
-+ Revision: 615081
-- the mass rebuild of 2010.1 packages
+%files -n %libname
+%license COPYING
+%{_libdir}/libsysprof-2.so
 
-* Thu May 06 2010 Frederic Crozat <fcrozat@mandriva.com> 1.1.6-1mdv2010.1
-+ Revision: 542993
-- Release 1.1.6
+%files -n %libnameui
+%license COPYING
+%{_libdir}/libsysprof-ui-2.so
 
-* Tue Mar 23 2010 Pascal Terjan <pterjan@mandriva.org> 1.1.4-1mdv2010.1
-+ Revision: 526876
-- Switch to 1.1 branch
-
-* Wed Nov 25 2009 Per Ã˜yvind Karlsen <peroyvind@mandriva.org> 1.0.12-2mdv2010.1
-+ Revision: 469874
-- fix static linking against against libbfd (P2)
-
-* Wed May 13 2009 Pascal Terjan <pterjan@mandriva.org> 1.0.12-1mdv2010.0
-+ Revision: 375265
-- Update to 1.0.12
-
-* Fri Mar 06 2009 Pascal Terjan <pterjan@mandriva.org> 1.0.10-7mdv2009.1
-+ Revision: 349951
-- Rebuild for new binutils
-
-* Thu Dec 25 2008 Funda Wang <fwang@mandriva.org> 1.0.10-6mdv2009.1
-+ Revision: 318882
-- fix strfmt
-
-  + Oden Eriksson <oeriksson@mandriva.com>
-    - lowercase ImageMagick
-
-* Tue Sep 30 2008 Pascal Terjan <pterjan@mandriva.org> 1.0.10-6mdv2009.0
-+ Revision: 290107
-- Fix the previous patch
-
-* Thu Sep 25 2008 Pascal Terjan <pterjan@mandriva.org> 1.0.10-5mdv2009.0
-+ Revision: 288216
-- Add recent patches from svn to build against recent kernels
-
-* Tue Aug 19 2008 Funda Wang <fwang@mandriva.org> 1.0.10-4mdv2009.0
-+ Revision: 273972
-- rebuild
-
-* Fri Aug 08 2008 Thierry Vignaud <tv@mandriva.org> 1.0.10-3mdv2009.0
-+ Revision: 269401
-- rebuild early 2009.0 package (before pixel changes)
-
-  + Pixel <pixel@mandriva.com>
-    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
-
-  + Pascal Terjan <pterjan@mandriva.org>
-    - rebuild for new libbfd
-
-* Sat May 10 2008 Pascal Terjan <pterjan@mandriva.org> 1.0.10-1mdv2009.0
-+ Revision: 205435
-- update to new version 1.0.10
-
-* Tue Feb 26 2008 Pascal Terjan <pterjan@mandriva.org> 1.0.9-3mdv2008.1
-+ Revision: 175473
-- Rebuild for new libbfd
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - rebuild for new libbfd
-    - drop old menu
-    - kill re-definition of %%buildroot on Pixel's request
-
-  + Olivier Blin <oblin@mandriva.com>
-    - restore BuildRoot
-
-* Sat Oct 27 2007 Pascal Terjan <pterjan@mandriva.org> 1.0.9-1mdv2008.1
-+ Revision: 102680
-- 1.0.9
-
-* Fri Jun 08 2007 Pascal Terjan <pterjan@mandriva.org> 1.0.8-3mdv2008.0
-+ Revision: 37221
-- rebuild for new libbfd
-
-
-* Tue Jan 16 2007 Pascal Terjan <pterjan@mandriva.org> 1.0.8-2mdv2007.0
-+ Revision: 109494
-- Rebuild for new binutils
-
-* Sun Dec 31 2006 Pascal Terjan <pterjan@mandriva.org> 1.0.8-1mdv2007.1
-+ Revision: 102961
-- 1.0.8
-- Import sysprof
-
-* Fri Aug 25 2006 Pascal Terjan <pterjan@mandriva.org> 1.0.3-1mdv2007.0
-- New release 1.0.3
-- XDG menu
-
-* Sat Apr 01 2006 Pascal Terjan <pterjan@mandriva.org> 1.0.2-2mdk
-- Rebuild for new binutils
-
-* Mon Feb 27 2006 Pascal Terjan <pterjan@mandriva.org> 1.0.2-1mdk
-- New release 1.0.2
-
-* Mon Dec 19 2005 Pascal Terjan <pterjan@mandriva.org> 1.0.1-1mdk
-- 1.0.1
-- drop P0 (merged upstream)
-- only works on x86
-
-* Wed Oct 12 2005 Nicolas Lécureuil <neoclust@mandriva.org> 1.0-2mdk
-- Fix BuildRequires (add ImageMagick because of the use of convert)
-- Split Requires(post,preun) into Requires(post) and Requires(preun)
-
-* Tue Oct 11 2005 Pascal Terjan <pterjan@mandriva.org> 1.0-1mdk
-- first Mandriva package
-
+%files -n %devname
+%exclude %{_libdir}/libsysprof-capture-2.a
+%{_includedir}/sysprof-2/
+%{_libdir}/pkgconfig/sysprof-2.pc
+%{_libdir}/pkgconfig/sysprof-capture-2.pc
+%{_libdir}/pkgconfig/sysprof-ui-2.pc
