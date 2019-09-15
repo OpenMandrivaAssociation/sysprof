@@ -1,4 +1,4 @@
-%global major		2
+%global major		3
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
