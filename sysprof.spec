@@ -122,7 +122,7 @@ developing applications that use %{name}.
 #{_libdir}/libsysprof-ui-3.so
 
 %files -n %devname
-%{_includedir}/sysprof-/
+#{_includedir}/sysprof-/
 %{_libdir}/pkgconfig/sysprof-3.pc
 %{_libdir}/pkgconfig/sysprof-capture-3.pc
 %{_libdir}/pkgconfig/sysprof-ui-3.pc
