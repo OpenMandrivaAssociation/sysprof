@@ -20,6 +20,7 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	itstool
 BuildRequires:	polkit-1-devel
 BuildRequires:	pkgconfig(systemd)
+BuildRequires:  pkgconfig(libdazzle-1.0)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
 BuildRequires:	libxml2-utils
@@ -126,3 +127,4 @@ desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 %{_libdir}/pkgconfig/sysprof-2.pc
 %{_libdir}/pkgconfig/sysprof-capture-2.pc
 %{_libdir}/pkgconfig/sysprof-ui-2.pc
+%{_libdir}/libsysprof-capture-3.a
