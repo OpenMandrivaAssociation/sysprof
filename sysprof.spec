@@ -88,10 +88,10 @@ developing applications that use %{name}.
 %find_lang %{name} --with-gnome
 
 
-%check
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
-desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
-%meson_test || :
+#check
+#appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
+#desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
+#meson_test || :
 
 
 %files
