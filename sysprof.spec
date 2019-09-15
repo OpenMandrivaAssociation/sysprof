@@ -119,7 +119,7 @@ developing applications that use %{name}.
 
 %files -n %libnameui
 %license COPYING
-%{_libdir}/libsysprof-ui-2.so
+#{_libdir}/libsysprof-ui-2.so
 
 %files -n %devname
 %exclude %{_libdir}/libsysprof-capture-2.a
