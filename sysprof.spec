@@ -115,16 +115,15 @@ developing applications that use %{name}.
 
 %files -n %libname
 %license COPYING
-%{_libdir}/libsysprof-2.so
+%{_libdir}/libsysprof-3.so
 
 %files -n %libnameui
 %license COPYING
-#{_libdir}/libsysprof-ui-2.so
+#{_libdir}/libsysprof-ui-3.so
 
 %files -n %devname
-%exclude %{_libdir}/libsysprof-capture-2.a
-%{_includedir}/sysprof-2/
-%{_libdir}/pkgconfig/sysprof-2.pc
-%{_libdir}/pkgconfig/sysprof-capture-2.pc
-%{_libdir}/pkgconfig/sysprof-ui-2.pc
+%{_includedir}/sysprof-/
+%{_libdir}/pkgconfig/sysprof-3.pc
+%{_libdir}/pkgconfig/sysprof-capture-3.pc
+%{_libdir}/pkgconfig/sysprof-ui-3.pc
 %{_libdir}/libsysprof-capture-3.a
