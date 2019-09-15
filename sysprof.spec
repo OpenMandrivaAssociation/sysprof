@@ -107,10 +107,10 @@ developing applications that use %{name}.
 %files cli -f %{name}.lang
 %license COPYING
 %{_bindir}/sysprof-cli
-%{_libexecdir}/sysprof/sysprofd
+#{_libexecdir}/sysprof/sysprofd
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
 %{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
-%{_datadir}/polkit-1/actions/org.gnome.sysprof2.policy
+#{_datadir}/polkit-1/actions/org.gnome.sysprof2.policy
 %{_unitdir}/sysprof2.service
 
 %files -n %libname
