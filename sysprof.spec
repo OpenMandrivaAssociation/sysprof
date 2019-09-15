@@ -98,9 +98,9 @@ developing applications that use %{name}.
 %license COPYING
 %doc NEWS README.md TODO AUTHORS
 %{_bindir}/sysprof
-%{_datadir}/metainfo/org.gnome.Sysprof2.appdata.xml
-%{_datadir}/applications/org.gnome.Sysprof2.desktop
-%{_datadir}/glib-2.0/schemas/org.gnome.sysprof2.gschema.xml
+#{_datadir}/metainfo/org.gnome.Sysprof2.appdata.xml
+#{_datadir}/applications/org.gnome.Sysprof2.desktop
+#{_datadir}/glib-2.0/schemas/org.gnome.sysprof2.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
 %{_datadir}/mime/packages/sysprof-mime.xml
 
