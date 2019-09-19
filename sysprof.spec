@@ -20,6 +20,9 @@ BuildRequires:	pkgconfig(gtk+-3.0)
 BuildRequires:	itstool
 BuildRequires:	polkit-1-devel
 BuildRequires:	pkgconfig(systemd)
+BuildRequires:  pkgconfig(gio-unix-2.0)
+BuildRequires:  pkgconfig(glib-2.0)
+BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(libdazzle-1.0)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
@@ -98,20 +101,26 @@ developing applications that use %{name}.
 %license COPYING
 %doc NEWS README.md TODO AUTHORS
 %{_bindir}/sysprof
-#{_datadir}/metainfo/org.gnome.Sysprof2.appdata.xml
-#{_datadir}/applications/org.gnome.Sysprof2.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.sysprof2.gschema.xml
+%{_datadir}/applications/org.gnome.Sysprof3.desktop
+%{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
+%{_datadir}/metainfo/org.gnome.Sysprof3.appdata.xml
 %{_datadir}/mime/packages/sysprof-mime.xml
 
 %files cli -f %{name}.lang
 %license COPYING
 %{_bindir}/sysprof-cli
-#{_libexecdir}/sysprof/sysprofd
+%{_libexecdir}/sysprofd
+%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
+%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
+%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
+%{_datadir}/dbus-1/system.d/org.gnome.Sysprof3.conf
 %{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
-#{_datadir}/polkit-1/actions/org.gnome.sysprof2.policy
+%{_datadir}/dbus-1/system-services/org.gnome.Sysprof3.service
+%{_datadir}/polkit-1/actions/org.gnome.sysprof3.policy
 %{_unitdir}/sysprof2.service
+%{_unitdir}/sysprof3.service
 
 %files -n %libname
 %license COPYING
@@ -119,11 +128,12 @@ developing applications that use %{name}.
 
 %files -n %libnameui
 %license COPYING
-#{_libdir}/libsysprof-ui-3.so
+%{_libdir}/libsysprof-ui-3.so
 
 %files -n %devname
-#{_includedir}/sysprof-/
+%{_includedir}/sysprof-3/
 %{_libdir}/pkgconfig/sysprof-3.pc
 %{_libdir}/pkgconfig/sysprof-capture-3.pc
 %{_libdir}/pkgconfig/sysprof-ui-3.pc
 %{_libdir}/libsysprof-capture-3.a
+
