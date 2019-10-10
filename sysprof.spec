@@ -6,7 +6,7 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 Name:		sysprof
-Version:	3.34.0
+Version:	3.34.1
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
