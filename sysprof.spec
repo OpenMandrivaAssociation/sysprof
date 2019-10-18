@@ -4,7 +4,7 @@
 %define devname		%mklibname sysprof -d
 
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
-%define enable_werror --disable-werror
+#define enable_werror --disable-werror
 
 Name:		sysprof
 Version:	3.34.1
@@ -82,6 +82,8 @@ developing applications that use %{name}.
 
 
 %build
+export CC=gcc
+export CXX=g++
 %meson
 %meson_build
 
