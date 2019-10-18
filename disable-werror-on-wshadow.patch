@@ -1,0 +1,12 @@
+diff --git a/meson.build b/meson.build
+index a018c34..5fc848d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -124,7 +124,6 @@ test_c_args = [
+   '-Werror=overflow',
+   '-Werror=parenthesis',
+   '-Werror=return-type',
+-  '-Werror=shadow',
+   '-Werror=strict-prototypes',
+   '-Werror=undef',
+ ]
