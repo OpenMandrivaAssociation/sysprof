@@ -1,3 +1,4 @@
+%global _disable_lto 1
 %global major		3
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
@@ -14,6 +15,7 @@ Group:		Development/Tools
 License:	GPLv3+
 URL:		http://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
+Patch0:		disable-werror-on-wshadow.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
@@ -78,7 +80,6 @@ developing applications that use %{name}.
 
 %prep
 %autosetup -p1
-
 
 %build
 %meson
