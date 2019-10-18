@@ -7,8 +7,8 @@
 #define enable_werror --disable-werror
 
 Name:		sysprof
-Version:	3.34.1
-Release:	2
+Version:	3.34.0
+Release:	3
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -82,8 +82,6 @@ developing applications that use %{name}.
 
 
 %build
-export CC=gcc
-export CXX=g++
 %meson
 %meson_build
 
