@@ -85,22 +85,19 @@ developing applications that use %{name}.
 %meson
 %meson_build
 
-
 %install
 %meson_install
 
 %find_lang %{name} --with-gnome
-
 
 #check
 #appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
 #desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 #meson_test || :
 
-
 %files
 %license COPYING
-%doc NEWS README.md TODO AUTHORS
+%doc NEWS README.md AUTHORS
 %{_bindir}/sysprof
 %{_datadir}/applications/org.gnome.Sysprof3.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
