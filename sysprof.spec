@@ -7,7 +7,7 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 Name:		sysprof
-Version:	3.34.1
+Version:	3.36.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
@@ -85,22 +85,19 @@ developing applications that use %{name}.
 %meson
 %meson_build
 
-
 %install
 %meson_install
 
 %find_lang %{name} --with-gnome
-
 
 #check
 #appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
 #desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
 #meson_test || :
 
-
 %files
 %license COPYING
-%doc NEWS README.md TODO AUTHORS
+%doc NEWS README.md AUTHORS
 %{_bindir}/sysprof
 %{_datadir}/applications/org.gnome.Sysprof3.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
@@ -126,6 +123,7 @@ developing applications that use %{name}.
 %files -n %libname
 %license COPYING
 %{_libdir}/libsysprof-3.so
+%{_libdir}/libsysprof-memory-3.so
 
 %files -n %libnameui
 %license COPYING
