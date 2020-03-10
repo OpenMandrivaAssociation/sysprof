@@ -123,6 +123,7 @@ developing applications that use %{name}.
 %files -n %libname
 %license COPYING
 %{_libdir}/libsysprof-3.so
+%{_libdir}/libsysprof-memory-3.so
 
 %files -n %libnameui
 %license COPYING
