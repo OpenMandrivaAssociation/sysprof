@@ -8,7 +8,7 @@
 
 Name:		sysprof
 Version:	3.36.0
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -16,6 +16,7 @@ License:	GPLv3+
 URL:		http://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 Patch0:		disable-werror-on-wshadow.patch
+Patch1:		sysprof-3.36.0-headers-c++.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
@@ -80,9 +81,9 @@ developing applications that use %{name}.
 
 %prep
 %autosetup -p1
+%meson
 
 %build
-%meson
 %meson_build
 
 %install
