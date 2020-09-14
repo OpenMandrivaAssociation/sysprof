@@ -16,7 +16,7 @@ License:	GPLv3+
 URL:		http://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 Patch0:		disable-werror-on-wshadow.patch
-Patch1:		sysprof-3.36.0-headers-c++.patch
+#Patch1:		sysprof-3.36.0-headers-c++.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
