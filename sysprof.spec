@@ -84,6 +84,7 @@ developing applications that use %{name}.
 %meson
 
 %build
+%global optflags %{optflags} -fcommon
 %meson_build
 
 %install
