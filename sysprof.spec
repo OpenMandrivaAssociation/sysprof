@@ -84,6 +84,8 @@ developing applications that use %{name}.
 %meson
 
 %build
+export CC=gcc
+export CXX=g++
 %global optflags %{optflags} -fcommon
 %meson_build
 
