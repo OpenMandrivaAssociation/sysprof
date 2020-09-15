@@ -85,6 +85,7 @@ developing applications that use %{name}.
 %meson
 
 %build
+export CXXFLAGS="%{optflags} -std=c++11"
 export CC=gcc
 export CXX=g++
 %global optflags %{optflags} -fcommon
