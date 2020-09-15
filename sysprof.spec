@@ -1,3 +1,4 @@
+%define _disable_ld_no_undefined 1
 %global _disable_lto 1
 %global major		3
 %define libname		%mklibname sysprof %major
