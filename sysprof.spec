@@ -127,6 +127,7 @@ developing applications that use %{name}.
 %license COPYING
 %{_libdir}/libsysprof-%{major}.so
 %{_libdir}/libsysprof-memory-%{major}.so
+%{_libdir}/libsysprof-speedtrack-%{major}.so
 
 %files -n %libnameui
 %license COPYING
