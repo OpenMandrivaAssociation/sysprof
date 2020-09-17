@@ -1,5 +1,5 @@
-%define _disable_ld_no_undefined 1
-%global _disable_lto 1
+#define _disable_ld_no_undefined 1
+#global _disable_lto 1
 %global major		3
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
@@ -18,6 +18,8 @@ URL:		http://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 Patch0:		disable-werror-on-wshadow.patch
 #Patch1:		sysprof-3.36.0-headers-c++.patch
+# https://gitlab.gnome.org/GNOME/sysprof/-/issues/48
+Patch2:   https://gitlab.gnome.org/GNOME/sysprof/-/commit/254b9f8f6973dd97d777b5522c6d0ed455c3c532.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
@@ -85,10 +87,10 @@ developing applications that use %{name}.
 %meson
 
 %build
-export CXXFLAGS="%{optflags} -std=c++17"
-export CC=gcc
-export CXX=g++
-%global optflags %{optflags} -fcommon
+#export CXXFLAGS="%{optflags} -std=c++17"
+#export CC=gcc
+#export CXX=g++
+#global optflags %{optflags} -fcommon
 %meson_build
 
 %install
