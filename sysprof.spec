@@ -1,6 +1,5 @@
-#define _disable_ld_no_undefined 1
-#global _disable_lto 1
-%global major		3
+
+%global major		4
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
@@ -87,10 +86,6 @@ developing applications that use %{name}.
 %meson
 
 %build
-#export CXXFLAGS="%{optflags} -std=c++17"
-#export CC=gcc
-#export CXX=g++
-#global optflags %{optflags} -fcommon
 %meson_build
 
 %install
@@ -130,17 +125,17 @@ developing applications that use %{name}.
 
 %files -n %libname
 %license COPYING
-%{_libdir}/libsysprof-3.so
-%{_libdir}/libsysprof-memory-3.so
+%{_libdir}/libsysprof-%{major}.so
+%{_libdir}/libsysprof-memory-%{major}.so
 
 %files -n %libnameui
 %license COPYING
-%{_libdir}/libsysprof-ui-3.so
+%{_libdir}/libsysprof-ui-%{major}.so
 
 %files -n %devname
-%{_includedir}/sysprof-3/
-%{_libdir}/pkgconfig/sysprof-3.pc
-%{_libdir}/pkgconfig/sysprof-capture-3.pc
-%{_libdir}/pkgconfig/sysprof-ui-3.pc
-%{_libdir}/libsysprof-capture-3.a
+%{_includedir}/sysprof-%{major}/
+%{_libdir}/pkgconfig/sysprof-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-ui-%{major}.pc
+%{_libdir}/libsysprof-capture-%{major}.a
 
