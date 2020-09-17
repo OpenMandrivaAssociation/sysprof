@@ -1,5 +1,5 @@
-%global _disable_lto 1
-%global major		3
+
+%global major		4
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
@@ -7,8 +7,8 @@
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 Name:		sysprof
-Version:	3.36.0
-Release:	2
+Version:	3.38.0
+Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -16,7 +16,9 @@ License:	GPLv3+
 URL:		http://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 Patch0:		disable-werror-on-wshadow.patch
-Patch1:		sysprof-3.36.0-headers-c++.patch
+#Patch1:		sysprof-3.36.0-headers-c++.patch
+# https://gitlab.gnome.org/GNOME/sysprof/-/issues/48
+Patch2:   https://gitlab.gnome.org/GNOME/sysprof/-/commit/254b9f8f6973dd97d777b5522c6d0ed455c3c532.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
@@ -123,17 +125,18 @@ developing applications that use %{name}.
 
 %files -n %libname
 %license COPYING
-%{_libdir}/libsysprof-3.so
-%{_libdir}/libsysprof-memory-3.so
+%{_libdir}/libsysprof-%{major}.so
+%{_libdir}/libsysprof-memory-%{major}.so
+%{_libdir}/libsysprof-speedtrack-%{major}.so
 
 %files -n %libnameui
 %license COPYING
-%{_libdir}/libsysprof-ui-3.so
+%{_libdir}/libsysprof-ui-%{major}.so
 
 %files -n %devname
-%{_includedir}/sysprof-3/
-%{_libdir}/pkgconfig/sysprof-3.pc
-%{_libdir}/pkgconfig/sysprof-capture-3.pc
-%{_libdir}/pkgconfig/sysprof-ui-3.pc
-%{_libdir}/libsysprof-capture-3.a
+%{_includedir}/sysprof-%{major}/
+%{_libdir}/pkgconfig/sysprof-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-ui-%{major}.pc
+%{_libdir}/libsysprof-capture-%{major}.a
 
