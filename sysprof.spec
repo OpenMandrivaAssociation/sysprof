@@ -6,9 +6,15 @@
 
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
+# sysprof builds a static library and doesn't make a difference between CFLAGS
+# for that and shared libraries -- resulting in clang LTO files being in the
+# *.a library, resulting in build failures for anything that tries to link to
+# the library using a different compiler
+%global _disable_lto 1
+
 Name:		sysprof
 Version:	3.38.1
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
