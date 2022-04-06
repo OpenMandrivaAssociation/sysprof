@@ -13,7 +13,7 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	3.42.1
+Version:	3.44.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(libdazzle-1.0)
+BuildRequires:  pkgconfig(libunwind-generic)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
 BuildRequires:	libxml2-utils
