@@ -13,7 +13,7 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	3.42.1
+Version:	3.44.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
