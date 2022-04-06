@@ -34,6 +34,7 @@ BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(libdazzle-1.0)
+BuildRequires:  pkgconfig(libunwind-generic)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
 BuildRequires:	libxml2-utils
