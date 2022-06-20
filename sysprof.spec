@@ -14,7 +14,7 @@
 
 Name:		sysprof
 Version:	3.44.0
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -145,4 +145,3 @@ developing applications that use %{name}.
 %{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-ui-%{major}.pc
 %{_libdir}/libsysprof-capture-%{major}.a
-
