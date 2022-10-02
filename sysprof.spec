@@ -4,6 +4,8 @@
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
 
+%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
+
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 # sysprof builds a static library and doesn't make a difference between CFLAGS
