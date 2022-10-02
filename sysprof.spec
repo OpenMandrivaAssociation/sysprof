@@ -1,4 +1,4 @@
-
+%global api		5
 %global major		4
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
@@ -13,8 +13,8 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	3.44.0
-Release:	2
+Version:	3.46.0
+Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -35,6 +35,8 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(libdazzle-1.0)
 BuildRequires:  pkgconfig(libunwind-generic)
+BuildRequires:  pkgconfig(gtk4)
+BuildRequires:  pkgconfig(libadwaita-1)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
 BuildRequires:	libxml2-utils
@@ -72,6 +74,14 @@ Group:		System/Libraries
 %description -n %libnameui
 The libsysprof-ui package contains the Sysprof UI library.
 
+%package        agent
+Summary:        Sysprof agent utility
+
+%description    agent
+The %{name}-agent package contains the sysprof-agent program. It provides a P2P
+D-Bus API to the process which can control subprocesses. It's used by IDE
+tooling to have more control across container boundaries.
+
 
 %package        -n %devname
 Summary:	Development files for %{name}
@@ -108,10 +118,10 @@ developing applications that use %{name}.
 %license COPYING
 %doc NEWS README.md AUTHORS
 %{_bindir}/sysprof
-%{_datadir}/applications/org.gnome.Sysprof3.desktop
+%{_datadir}/applications/org.gnome.Sysprof.desktop
 %{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
-%{_datadir}/metainfo/org.gnome.Sysprof3.appdata.xml
+%{_datadir}/metainfo/org.gnome.Sysprof.appdata.xml
 %{_datadir}/mime/packages/sysprof-mime.xml
 
 %files cli -f %{name}.lang
@@ -139,9 +149,13 @@ developing applications that use %{name}.
 %license COPYING
 %{_libdir}/libsysprof-ui-%{major}.so
 
+%files agent
+%license COPYING
+%{_bindir}/sysprof-agent
+
 %files -n %devname
 %{_includedir}/sysprof-%{major}/
 %{_libdir}/pkgconfig/sysprof-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
-%{_libdir}/pkgconfig/sysprof-ui-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
 %{_libdir}/libsysprof-capture-%{major}.a
