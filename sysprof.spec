@@ -102,6 +102,8 @@ developing applications that use %{name}.
 %meson
 
 %build
+export CC=gcc
+export CXX=g++
 %meson_build
 
 %install
