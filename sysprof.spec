@@ -128,6 +128,7 @@ developing applications that use %{name}.
 %license COPYING
 %{_bindir}/sysprof-cli
 %{_libexecdir}/sysprofd
+%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof.Agent.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
@@ -147,7 +148,7 @@ developing applications that use %{name}.
 
 %files -n %libnameui
 %license COPYING
-#{_libdir}/libsysprof-ui-%{major}.so
+%{_libdir}/libsysprof-ui-%{api}.so
 
 %files agent
 %license COPYING
@@ -155,6 +156,7 @@ developing applications that use %{name}.
 
 %files -n %devname
 %{_includedir}/sysprof-%{major}/
+%{_includedir}/sysprof-ui-5-%{api}
 %{_libdir}/pkgconfig/sysprof-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
