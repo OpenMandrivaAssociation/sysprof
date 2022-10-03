@@ -147,7 +147,7 @@ developing applications that use %{name}.
 
 %files -n %libnameui
 %license COPYING
-%{_libdir}/libsysprof-ui-%{major}.so
+#{_libdir}/libsysprof-ui-%{major}.so
 
 %files agent
 %license COPYING
