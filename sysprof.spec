@@ -4,8 +4,6 @@
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
 
-%global optflags %{optflags} -Wno-error -Wno-implicit-function-declaration
-
 %define url_ver	%(echo %{version}|cut -d. -f1,2)
 
 # sysprof builds a static library and doesn't make a difference between CFLAGS
@@ -104,8 +102,6 @@ developing applications that use %{name}.
 %meson
 
 %build
-export CC=gcc
-export CXX=g++
 %meson_build
 
 %install
@@ -123,7 +119,7 @@ export CXX=g++
 %doc NEWS README.md AUTHORS
 %{_bindir}/sysprof
 %{_datadir}/applications/org.gnome.Sysprof.desktop
-%{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
+#{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
 %{_datadir}/metainfo/org.gnome.Sysprof.appdata.xml
 %{_datadir}/mime/packages/sysprof-mime.xml
