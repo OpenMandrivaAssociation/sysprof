@@ -156,7 +156,7 @@ developing applications that use %{name}.
 
 %files -n %devname
 %{_includedir}/sysprof-%{major}/
-%{_includedir}/sysprof-ui-5-%{api}
+%{_includedir}/sysprof-ui-%{api}
 %{_libdir}/pkgconfig/sysprof-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
 %{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
