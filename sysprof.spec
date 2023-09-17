@@ -1,3 +1,5 @@
+%global optflags %{optflags} -Wno-format-nonliteral
+
 %global api		6
 %global major		6
 %define libname		%mklibname sysprof %major
@@ -101,14 +103,8 @@ developing applications that use %{name}.
 
 %prep
 %autosetup -p1
-export CC=gcc
-export CXX=g++
 %meson
-export CC=gcc
-export CXX=g++
 %build
-export CC=gcc
-export CXX=g++
 %meson_build
 
 %install
