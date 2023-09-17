@@ -155,7 +155,7 @@ export CXX=g++
 
 %files -n %libnameui
 %license COPYING
-%{_libdir}/libsysprof-ui-%{api}.so
+#{_libdir}/libsysprof-ui-%{api}.so
 
 %files agent
 %license COPYING
