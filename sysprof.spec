@@ -1,5 +1,5 @@
-%global api		5
-%global major		4
+%global api		6
+%global major		6
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
@@ -69,12 +69,12 @@ Group:		System/Libraries
 The libsysprof package contains the Sysprof library.
 
 
-%package     -n %libnameui
-Summary:	Sysprof UI library
-Group:		System/Libraries
+#package     -n %libnameui
+#Summary:	Sysprof UI library
+#Group:		System/Libraries
 
-%description -n %libnameui
-The libsysprof-ui package contains the Sysprof UI library.
+#description -n %libnameui
+#The libsysprof-ui package contains the Sysprof UI library.
 
 %package        agent
 Summary:        Sysprof agent utility
@@ -90,7 +90,7 @@ Summary:	Development files for %{name}
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libnameui} = %{version}-%{release}
+#Requires:	%{libnameui} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}-ui-devel = %{version}-%{release}
 
@@ -149,12 +149,14 @@ export CXX=g++
 
 %files -n %libname
 %license COPYING
-#{_libdir}/libsysprof-%{major}.so
-#{_libdir}/libsysprof-memory-%{major}.so
-#{_libdir}/libsysprof-speedtrack-%{major}.so
+%{_libdir}/libsysprof-%{major}.so
+%{_libdir}/libsysprof-%{major}.so.6*
+%{_libdir}/libsysprof-memory-%{major}.so
+%{_libdir}/libsysprof-speedtrack-%{major}.so
+%{_libdir}/libsysprof-tracer-%{major}.so
 
-%files -n %libnameui
-%license COPYING
+#files -n %libnameui
+#license COPYING
 #{_libdir}/libsysprof-ui-%{api}.so
 
 %files agent
@@ -162,9 +164,7 @@ export CXX=g++
 %{_bindir}/sysprof-agent
 
 %files -n %devname
-#{_includedir}/sysprof-%{major}/
-#{_includedir}/sysprof-ui-%{api}
-#{_libdir}/pkgconfig/sysprof-%{major}.pc
-#{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
-#{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
-#{_libdir}/libsysprof-capture-%{major}.a
+%{_includedir}/sysprof-%{major}/
+%{_libdir}/pkgconfig/sysprof-%{major}.pc
+%{_libdir}/pkgconfig/sysprof-capture-4.pc
+%{_libdir}/libsysprof-capture-4.a
