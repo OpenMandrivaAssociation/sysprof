@@ -1,5 +1,8 @@
-%global api		5
-%global major		4
+# Fix me! https://gitlab.gnome.org/GNOME/sysprof/-/issues/99
+%global optflags %{optflags} -Wno-format-nonliteral
+
+%global api		6
+%global major		6
 %define libname		%mklibname sysprof %major
 %define libnameui	%mklibname sysprof-ui %major
 %define devname		%mklibname sysprof -d
@@ -13,8 +16,8 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	3.48.0
-Release:	2
+Version:	45.0
+Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -33,7 +36,9 @@ BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(libdex-1)
 BuildRequires:  pkgconfig(libdazzle-1.0)
+BuildRequires:  pkgconfig(libpanel-1)
 BuildRequires:  pkgconfig(libunwind-generic)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(libadwaita-1)
@@ -62,17 +67,17 @@ The %{name}-cli package contains the sysprof-cli command line utility.
 %package     -n %libname
 Summary:	Sysprof library
 Group:		System/Libraries
+Obsoletes:	%libnameui < %{EVRD}
 
 %description -n %libname
 The libsysprof package contains the Sysprof library.
 
+#package     -n %libnameui
+#Summary:	Sysprof UI library
+#Group:		System/Libraries
 
-%package     -n %libnameui
-Summary:	Sysprof UI library
-Group:		System/Libraries
-
-%description -n %libnameui
-The libsysprof-ui package contains the Sysprof UI library.
+#description -n %libnameui
+#The libsysprof-ui package contains the Sysprof UI library.
 
 %package        agent
 Summary:        Sysprof agent utility
@@ -88,7 +93,7 @@ Summary:	Development files for %{name}
 Group:		Development/Tools
 Requires:	%{name} = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
-Requires:	%{libnameui} = %{version}-%{release}
+#Requires:	%{libnameui} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}-ui-devel = %{version}-%{release}
 
@@ -100,7 +105,6 @@ developing applications that use %{name}.
 %prep
 %autosetup -p1
 %meson
-
 %build
 %meson_build
 
@@ -129,26 +133,28 @@ developing applications that use %{name}.
 %{_bindir}/sysprof-cli
 %{_libexecdir}/sysprofd
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof.Agent.xml
-%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
+#{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
-%{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
+#{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof3.conf
-%{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
+#{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
 %{_datadir}/dbus-1/system-services/org.gnome.Sysprof3.service
 %{_datadir}/polkit-1/actions/org.gnome.sysprof3.policy
-%{_unitdir}/sysprof2.service
+#{_unitdir}/sysprof2.service
 %{_unitdir}/sysprof3.service
 
 %files -n %libname
 %license COPYING
 %{_libdir}/libsysprof-%{major}.so
+%{_libdir}/libsysprof-%{major}.so.6*
 %{_libdir}/libsysprof-memory-%{major}.so
 %{_libdir}/libsysprof-speedtrack-%{major}.so
+%{_libdir}/libsysprof-tracer-%{major}.so
 
-%files -n %libnameui
-%license COPYING
-%{_libdir}/libsysprof-ui-%{api}.so
+#files -n %libnameui
+#license COPYING
+#{_libdir}/libsysprof-ui-%{api}.so
 
 %files agent
 %license COPYING
@@ -156,8 +162,6 @@ developing applications that use %{name}.
 
 %files -n %devname
 %{_includedir}/sysprof-%{major}/
-%{_includedir}/sysprof-ui-%{api}
 %{_libdir}/pkgconfig/sysprof-%{major}.pc
-%{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
-%{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
-%{_libdir}/libsysprof-capture-%{major}.a
+%{_libdir}/pkgconfig/sysprof-capture-4.pc
+%{_libdir}/libsysprof-capture-4.a
