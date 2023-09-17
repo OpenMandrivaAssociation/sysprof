@@ -26,7 +26,6 @@ Patch0:		disable-werror-on-wshadow.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
-BuildRequires:  pkgconfig(gtk4)
 BuildRequires:	itstool
 BuildRequires:	polkit-1-devel
 BuildRequires:	pkgconfig(systemd)
@@ -34,6 +33,7 @@ BuildRequires:  pkgconfig(json-glib-1.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
+BuildRequires:  pkgconfig(libdex-1)
 BuildRequires:  pkgconfig(libdazzle-1.0)
 BuildRequires:  pkgconfig(libunwind-generic)
 BuildRequires:  pkgconfig(gtk4)
