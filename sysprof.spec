@@ -13,8 +13,8 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	3.48.0
-Release:	2
+Version:	45.0
+Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -26,6 +26,7 @@ Patch0:		disable-werror-on-wshadow.patch
 BuildRequires:	binutils-devel
 BuildRequires:	gettext
 BuildRequires:	pkgconfig(gtk+-3.0)
+BuildRequires:  pkgconfig(gtk4)
 BuildRequires:	itstool
 BuildRequires:	polkit-1-devel
 BuildRequires:	pkgconfig(systemd)
