@@ -102,8 +102,11 @@ developing applications that use %{name}.
 %prep
 %autosetup -p1
 %meson
-
+export CC=gcc
+export CXX=g++
 %build
+export CC=gcc
+export CXX=g++
 %meson_build
 
 %install
