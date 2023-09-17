@@ -162,9 +162,9 @@ export CXX=g++
 %{_bindir}/sysprof-agent
 
 %files -n %devname
-%{_includedir}/sysprof-%{major}/
-%{_includedir}/sysprof-ui-%{api}
-%{_libdir}/pkgconfig/sysprof-%{major}.pc
-%{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
-%{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
-%{_libdir}/libsysprof-capture-%{major}.a
+#{_includedir}/sysprof-%{major}/
+#{_includedir}/sysprof-ui-%{api}
+#{_libdir}/pkgconfig/sysprof-%{major}.pc
+#{_libdir}/pkgconfig/sysprof-capture-%{major}.pc
+#{_libdir}/pkgconfig/sysprof-ui-%{api}.pc
+#{_libdir}/libsysprof-capture-%{major}.a
