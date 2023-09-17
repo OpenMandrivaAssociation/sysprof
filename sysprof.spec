@@ -1,3 +1,4 @@
+# Fix me! https://gitlab.gnome.org/GNOME/sysprof/-/issues/99
 %global optflags %{optflags} -Wno-format-nonliteral
 
 %global api		6
@@ -66,10 +67,10 @@ The %{name}-cli package contains the sysprof-cli command line utility.
 %package     -n %libname
 Summary:	Sysprof library
 Group:		System/Libraries
+Obsoletes:	%libnameui < %{EVRD}
 
 %description -n %libname
 The libsysprof package contains the Sysprof library.
-
 
 #package     -n %libnameui
 #Summary:	Sysprof UI library
