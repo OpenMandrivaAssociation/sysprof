@@ -136,15 +136,15 @@ export CXX=g++
 %{_bindir}/sysprof-cli
 %{_libexecdir}/sysprofd
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof.Agent.xml
-%{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
+#{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
-%{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
+#{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof3.conf
-%{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
+#{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
 %{_datadir}/dbus-1/system-services/org.gnome.Sysprof3.service
 %{_datadir}/polkit-1/actions/org.gnome.sysprof3.policy
-%{_unitdir}/sysprof2.service
+#{_unitdir}/sysprof2.service
 %{_unitdir}/sysprof3.service
 
 %files -n %libname
