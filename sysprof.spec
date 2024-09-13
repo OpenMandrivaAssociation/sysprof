@@ -17,7 +17,7 @@
 
 Name:		sysprof
 Version:	47.beta
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
