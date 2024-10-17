@@ -22,7 +22,7 @@ Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
 License:	GPLv3+
-URL:		http://www.sysprof.com
+URL:		https://www.sysprof.com
 Source0:	https://download.gnome.org/sources/sysprof/%{url_ver}/sysprof-%{version}.tar.xz
 Patch0:		disable-werror-on-wshadow.patch
 
