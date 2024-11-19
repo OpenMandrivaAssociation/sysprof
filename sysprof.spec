@@ -17,7 +17,7 @@
 
 Name:		sysprof
 Version:	47.1
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -91,7 +91,6 @@ tooling to have more control across container boundaries.
 %package        -n %devname
 Summary:	Development files for %{name}
 Group:		Development/Tools
-Requires:	%{name} = %{version}-%{release}
 Requires:	%{libname} = %{version}-%{release}
 #Requires:	%{libnameui} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
