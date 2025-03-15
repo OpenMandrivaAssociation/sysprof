@@ -40,6 +40,7 @@ BuildRequires:  pkgconfig(libdex-1)
 BuildRequires:  pkgconfig(libdazzle-1.0)
 BuildRequires:  pkgconfig(libpanel-1)
 BuildRequires:  pkgconfig(libunwind-generic)
+BuildRequires:  pkgconfig(libdebuginfod)
 BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(libadwaita-1)
 BuildRequires:	appstream-util
