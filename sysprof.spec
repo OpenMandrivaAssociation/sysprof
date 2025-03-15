@@ -131,7 +131,9 @@ developing applications that use %{name}.
 %files cli -f %{name}.lang
 %license COPYING
 %{_bindir}/sysprof-cli
+%{_bindir}/sysprof-cat
 %{_libexecdir}/sysprofd
+%{_libexecdir}/sysprof-live-unwinder
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof.Agent.xml
 #{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
