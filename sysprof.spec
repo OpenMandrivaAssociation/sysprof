@@ -125,7 +125,7 @@ developing applications that use %{name}.
 %{_datadir}/applications/org.gnome.Sysprof.desktop
 #{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
-%{_datadir}/metainfo/org.gnome.Sysprof.appdata.xml
+%{_datadir}/metainfo/org.gnome.Sysprof.metainfo.xml
 %{_datadir}/mime/packages/sysprof-mime.xml
 
 %files cli -f %{name}.lang
