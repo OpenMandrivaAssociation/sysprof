@@ -138,6 +138,7 @@ developing applications that use %{name}.
 #{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
+%{_datadir}/dbus-1/services/org.gnome.Sysprof.service
 #{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof3.conf
 #{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
