@@ -16,7 +16,7 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	49.rc
+Version:	49.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
