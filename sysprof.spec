@@ -16,7 +16,7 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	49.0
+Version:	50.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
@@ -45,7 +45,7 @@ BuildRequires:  pkgconfig(gtk4)
 BuildRequires:  pkgconfig(libadwaita-1)
 BuildRequires:	appstream-util
 BuildRequires:	desktop-file-utils
-BuildRequires:	libxml2-utils
+BuildRequires:	libxml2-utils >= 2.15.2
 BuildRequires:	meson
 
 Requires:	hicolor-icon-theme
