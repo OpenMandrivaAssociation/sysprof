@@ -16,7 +16,7 @@
 %global _disable_lto 1
 
 Name:		sysprof
-Version:	50.0
+Version:	51.0
 Release:	1
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
@@ -73,13 +73,6 @@ Obsoletes:	%libnameui < %{EVRD}
 %description -n %libname
 The libsysprof package contains the Sysprof library.
 
-#package     -n %libnameui
-#Summary:	Sysprof UI library
-#Group:		System/Libraries
-
-#description -n %libnameui
-#The libsysprof-ui package contains the Sysprof UI library.
-
 %package        agent
 Summary:        Sysprof agent utility
 
@@ -93,7 +86,6 @@ tooling to have more control across container boundaries.
 Summary:	Development files for %{name}
 Group:		Development/Tools
 Requires:	%{libname} = %{version}-%{release}
-#Requires:	%{libnameui} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}-ui-devel = %{version}-%{release}
 
@@ -113,17 +105,11 @@ developing applications that use %{name}.
 
 %find_lang %{name} --with-gnome
 
-#check
-#appstream-util validate-relax --nonet %{buildroot}%{_datadir}/metainfo/*.appdata.xml
-#desktop-file-validate %{buildroot}%{_datadir}/applications/*.desktop
-#meson_test || :
-
 %files
 %license COPYING
 %doc NEWS README.md AUTHORS
 %{_bindir}/sysprof
 %{_datadir}/applications/org.gnome.Sysprof.desktop
-#{_datadir}/glib-2.0/schemas/org.gnome.sysprof3.gschema.xml
 %{_datadir}/icons/hicolor/*/*/*
 %{_datadir}/metainfo/org.gnome.Sysprof.metainfo.xml
 %{_datadir}/mime/packages/sysprof-mime.xml
@@ -135,16 +121,12 @@ developing applications that use %{name}.
 %{_libexecdir}/sysprofd
 %{_libexecdir}/sysprof-live-unwinder
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof.Agent.xml
-#{_datadir}/dbus-1/interfaces/org.gnome.Sysprof2.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Profiler.xml
 %{_datadir}/dbus-1/interfaces/org.gnome.Sysprof3.Service.xml
 %{_datadir}/dbus-1/services/org.gnome.Sysprof.service
-#{_datadir}/dbus-1/system.d/org.gnome.Sysprof2.conf
 %{_datadir}/dbus-1/system.d/org.gnome.Sysprof3.conf
-#{_datadir}/dbus-1/system-services/org.gnome.Sysprof2.service
 %{_datadir}/dbus-1/system-services/org.gnome.Sysprof3.service
 %{_datadir}/polkit-1/actions/org.gnome.sysprof3.policy
-#{_unitdir}/sysprof2.service
 %{_unitdir}/sysprof3.service
 
 %files -n %libname
@@ -154,10 +136,6 @@ developing applications that use %{name}.
 %{_libdir}/libsysprof-memory-%{major}.so
 %{_libdir}/libsysprof-speedtrack-%{major}.so
 %{_libdir}/libsysprof-tracer-%{major}.so
-
-#files -n %libnameui
-#license COPYING
-#{_libdir}/libsysprof-ui-%{api}.so
 
 %files agent
 %license COPYING
