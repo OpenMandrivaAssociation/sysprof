@@ -17,7 +17,7 @@
 
 Name:		sysprof
 Version:	51.0
-Release:	1
+Release:	2
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
@@ -88,6 +88,7 @@ Group:		Development/Tools
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Provides:	%{name}-ui-devel = %{version}-%{release}
+Obsoletes: sysprof-capture = 51.0
 
 %description    -n %devname
 The %{devname} package contains libraries and header files for
