@@ -17,7 +17,7 @@
 
 Name:		sysprof
 Version:	51.0
-Release:	2
+Release:	3
 Summary:	A system-wide Linux profiler
 Group:		Development/Tools
 
